@@ -1,0 +1,39 @@
+{
+  "name": "git-ahead",
+  "version": "1.0.0",
+  "repository": "git@github.com:dzek69/git-ahead.git",
+  "author": "Jacek Nowacki",
+  "license": "MIT",
+  "scripts": {
+    "docs": "node build-scripts/docs.mjs && jsdoc -r src README.md -t node_modules/docdash -d ./docs -u ./tutorials -c jsdoc.json && node build-scripts/docs.after.mjs",
+    "prepublishOnly": "yarn lint && yarn docs",
+    "lint": "eslint --report-unused-disable-directives 'src/**/*.mjs' 'src/*.mjs'",
+    "lint:fix": "yarn lint --fix"
+  },
+  "engines": {
+    "node": ">=13"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "bin": {
+    "git-ahead": "src/index.mjs"
+  },
+  "devDependencies": {
+    "@dzek69/eslint-config-base": "^1.0.1",
+    "docdash": "^1.2.0",
+    "eslint": "^6.8.0",
+    "fs-extra": "^9.0.1",
+    "husky": "^4.2.3",
+    "jsdoc": "^3.6.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn prepublishOnly"
+    }
+  },
+  "libraryTemplate": {
+    "version": "2.0.8"
+  }
+}
